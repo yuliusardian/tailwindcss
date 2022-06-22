@@ -1,0 +1,18 @@
+/* components.scss */ /* components/nav.scss */
+.nav-icentre {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.nav-link {
+  font-size: 12px;
+}
+
+/* components/font.scss */
+@font-face {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  src: url("/assets/fonts/sf-pro-text_regular.woff2") format("woff2");
+  font-display: swap;
+}

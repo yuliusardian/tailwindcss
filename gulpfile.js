@@ -91,11 +91,10 @@ function html(done) {
 
 function watcher() {
     for (let page in pages) {
-        currentFileOnChange = pages[page]
-
-        watch(pages[page].source.html, series(css, html, reloadLivePreview)).on('change',
-            function (path, stats) {
+        watch(pages[page].source.html, {}, series(css, html, reloadLivePreview)).on('change', function (path, stats) {
             // do magic.
+            console.log(`File ${path} has been changed`)
+            currentFileOnChange = pages[page]
         })
     }
 }

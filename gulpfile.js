@@ -4,6 +4,7 @@ const postCss = require('gulp-postcss')
 const concat = require('gulp-concat')
 const del = require('del');
 const browserSync = require('browser-sync').create()
+const nunjucks = require("gulp-nunjucks");
 
 const configs = require("./config")
 
@@ -36,7 +37,7 @@ function css(done) {
                 require('postcss-import'),
                 tailwindCss({
                     content: [
-                        currentFileOnChange.source.html,
+                        `${currentFileOnChange.dist.html.dest}/${currentFileOnChange.dist.html.name}`
                     ]
                 }),
                 require('cssnano'),
@@ -58,7 +59,7 @@ function css(done) {
                     require('postcss-import'),
                     tailwindCss({
                         content: [
-                            pages[page].source.html,
+                            `${pages[page].dist.html.dest}/${pages[page].dist.html.name}`,
                         ]
                     }),
                     require('cssnano'),
@@ -75,7 +76,10 @@ function html(done) {
     if (currentFileOnChange !== null) {
         src([
             currentFileOnChange.source.html
-        ], {}).pipe(dest(currentFileOnChange.dist.html))
+        ], {}).pipe(nunjucks.compile(
+            // passing data into compiler defined at config.js
+            currentFileOnChange.nunjucks
+        )).pipe(dest(currentFileOnChange.dist.html.dest))
         done()
     }
 
@@ -83,7 +87,10 @@ function html(done) {
         for (let page in pages) {
             src([
                 pages[page].source.html
-            ], {}).pipe(dest(pages[page].dist.html))
+            ], {}).pipe(nunjucks.compile(
+                // passing data into compiler defined at config.js
+                pages[page].nunjucks
+            )).pipe(dest(pages[page].dist.html.dest))
         }
         done()
     }
@@ -97,6 +104,12 @@ function watcher() {
             currentFileOnChange = pages[page]
         })
     }
+
+    watch([
+        "./src/partial/**/*.html",
+    ], {}, series(css, html, reloadLivePreview)).on('change', function (path, stats) {
+        console.log(`Partial HTML File ${path} has been changed`)
+    })
 
     watch([
         "./src/css/**/*.scss",

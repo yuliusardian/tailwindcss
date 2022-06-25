@@ -1,31 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tailwindcss + Gulp</title>
+{% extends "./partial/layout.html" %}
 
-    <link rel="stylesheet" href="./css/pages/home.css">
-</head>
-<body>
+{% block css %}
+<link rel="stylesheet" href="./css/pages/home.css">
+{% endblock %}
 
-<nav class="sticky top-0 z-10 nav-icentre">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-11">
-            <div class="ml-12 flex-1 flex items-center justify-center sm:items-stretch sm:justify-start text-neutral-400">
-                <div class="flex-shrink-0 flex items-center">
-                    <a class="w-auto nav-link hover:text-neutral-300" href="/">
-                        Logo
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<h1 class="text-sm text-bold underline text-center text-green-500">Its working now.</h1>
+{% block body %}
+<h1 class="text-sm text-bold underline text-center text-blue-500">Its working now.</h1>
 <a href="./pages/a.html">Go To A</a>
-</body>
-</html>
+{% endblock %}

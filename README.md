@@ -1,6 +1,6 @@
-# Tailwindcss + Gulp Development Starter Kit
+# Tailwindcss + Nunjucks + Gulp Development Starter Kit
 
-Tailwindcss + Gulp Development Starter Kit, speed up your development process with predefined gulp task.
+Tailwindcss + Nunjucks + Gulp Development Starter Kit, speed up your development process with predefined gulp task.
 The gulp task will be generated page and css based on mapping ```pages``` object in ```config.js``` file. 
 So each page will have their own css.
 
@@ -38,6 +38,9 @@ Mapping your page at ```pages``` object in ```config.js``` file, example :
                 dest: "public/css/pages",
                 name: "my.css"
             },
+        }
+        nunjucks: {
+            title: "My Title"
         }
     },
 

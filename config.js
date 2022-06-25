@@ -18,11 +18,17 @@ module.exports = {
                 dest: "src/css/pages"
             },
             dist: {
-                html: "public",
+                html: {
+                    dest: "public",
+                    name: "index.html",
+                },
                 css: {
                     dest: "public/css/pages",
                     name: "home.css"
                 },
+            },
+            nunjucks: {
+                title: "Tailwindcss + Nunjucks + Gulp"
             }
         },
         a: {
@@ -32,11 +38,17 @@ module.exports = {
                 dest: "src/css/pages"
             },
             dist: {
-                html: "public/pages",
+                html: {
+                    dest: "public/pages",
+                    name: "a.html",
+                },
                 css: {
                     dest: "public/css/pages",
                     name: "a.css"
                 },
+            },
+            nunjucks: {
+                title: "A"
             }
         },
     },

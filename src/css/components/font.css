@@ -1,7 +1,0 @@
-/* components/font.scss */
-@font-face {
-  font-family: "SF Pro Text";
-  font-style: normal;
-  src: url("/assets/fonts/sf-pro-text_regular.woff2") format("woff2");
-  font-display: swap;
-}

@@ -93,10 +93,22 @@ function watcher() {
     for (let page in pages) {
         watch(pages[page].source.html, {}, series(css, html, reloadLivePreview)).on('change', function (path, stats) {
             // do magic.
-            console.log(`File ${path} has been changed`)
+            console.log(`HTML File ${path} has been changed`)
             currentFileOnChange = pages[page]
         })
     }
+
+    watch([
+        "./src/css/**/*.scss",
+    ], {}, series(css, html, reloadLivePreview)).on('change', function (path, stats) {
+        console.log(`CSS File ${path} has been changed`)
+    })
+
+    watch([
+        "./src/js/**/*.js",
+    ], {}, series(css, html, reloadLivePreview)).on('change', function (path, stats) {
+        console.log(`JS File ${path} has been changed`)
+    })
 }
 
 function cleaner() {

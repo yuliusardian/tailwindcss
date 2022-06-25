@@ -4,13 +4,16 @@ const postCss = require('gulp-postcss')
 const concat = require('gulp-concat')
 const del = require('del');
 const browserSync = require('browser-sync').create()
-const nunjucks = require("gulp-nunjucks");
+const nunjucks = require("gulp-nunjucks")
+const nunjucksLib = require('nunjucks')
 
 const configs = require("./config")
 
 let tailwindCss = require('tailwindcss')
 let pages = configs.pages
 let currentFileOnChange = null
+
+let nunjucksEnv = new nunjucksLib.Environment(new nunjucksLib.FileSystemLoader('src', {}));
 
 function livePreview() {
     browserSync.init({
@@ -78,7 +81,9 @@ function html(done) {
             currentFileOnChange.source.html
         ], {}).pipe(nunjucks.compile(
             // passing data into compiler defined at config.js
-            currentFileOnChange.nunjucks
+            currentFileOnChange.nunjucks, {
+                env: nunjucksEnv
+            }
         )).pipe(dest(currentFileOnChange.dist.html.dest))
         done()
     }
@@ -89,7 +94,9 @@ function html(done) {
                 pages[page].source.html
             ], {}).pipe(nunjucks.compile(
                 // passing data into compiler defined at config.js
-                pages[page].nunjucks
+                pages[page].nunjucks, {
+                    env: nunjucksEnv
+                }
             )).pipe(dest(pages[page].dist.html.dest))
         }
         done()
